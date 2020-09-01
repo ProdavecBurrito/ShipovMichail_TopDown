@@ -2,20 +2,35 @@
 
 public class PauseMenuKey : MonoBehaviour
 {
+    #region Fields
 
-    #region PrivateFields
-
-    [SerializeField] private KeyCode _pauseBtn = KeyCode.Escape;
     [SerializeField] private GameObject _pauseMenu;
+
+    private InputManager _inputManager;
 
     #endregion
 
 
     #region UnityMethods
 
+    private void Start()
+    {
+        _inputManager = GetComponent<InputManager>();
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(_pauseBtn))
+        CheckPauseBtn();
+    }
+
+    #endregion
+
+
+    #region Methods
+
+    private void CheckPauseBtn()
+    {
+        if (Input.GetKeyDown(_inputManager.PauseBtn))
         {
             if (_pauseMenu.activeSelf == false)
             {
@@ -25,10 +40,8 @@ public class PauseMenuKey : MonoBehaviour
             {
                 _pauseMenu.SetActive(false);
             }
-
         }
     }
 
     #endregion
-
 }

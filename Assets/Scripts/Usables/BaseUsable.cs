@@ -3,20 +3,21 @@
 
 public abstract class BaseUsable : MonoBehaviour
 {
-
-    #region ProtectedFields
+    #region Fields
 
     protected IntaractionTxt _intaractionText;
-    protected PlayerController _player;
+    protected PlayerMain _playerMain;
+    protected PlayerInventory _playerInventory;
 
     #endregion
 
 
     #region UnityMethods
 
-    private void Start()
+     protected virtual void Start()
     {
-        _player = FindObjectOfType<PlayerController>();
+        _playerInventory = FindObjectOfType<PlayerInventory>();
+        _playerMain = FindObjectOfType<PlayerMain>();
         _intaractionText = FindObjectOfType<IntaractionTxt>();
     }
 
@@ -25,10 +26,7 @@ public abstract class BaseUsable : MonoBehaviour
 
     #region Methods
 
-    public virtual void Use()
-    {
-    }
+    public abstract void Use();
 
     #endregion
-
 }

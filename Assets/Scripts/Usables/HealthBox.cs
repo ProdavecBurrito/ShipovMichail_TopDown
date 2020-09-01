@@ -3,17 +3,32 @@
 
 public class HealthBox : BaseUsable
 {
-
     #region UnityMethods
 
     private void OnTriggerEnter(Collider other)
     {
+        CheckWhatPlayer(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _playerMain.IsCanUse = false;
+        _intaractionText.SetEmptyTxt();
+    }
+
+    #endregion
+
+
+    #region Methods
+
+    private void CheckWhatPlayer(Collider other)
+    {
         if (other.CompareTag("Player"))
         {
 
-            if (_player.Health != _player.MaxHealth)
+            if (_playerMain.Health != _playerMain.MaxHealth)
             {
-                _player.IsCanUse = true;
+                _playerMain.IsCanUse = true;
                 _intaractionText.SetText(_intaractionText.HealthBoxTxt);
             }
             else
@@ -23,25 +38,13 @@ public class HealthBox : BaseUsable
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        _player.IsCanUse = false;
-        _intaractionText.SetEmptyTxt();
-    }
-
-    #endregion
-
-
-    #region Methods
-
     public override void Use()
     {
-        _player.IsCanUse = false;
-        _player.FullHealth();
+        _playerMain.IsCanUse = false;
+        _playerMain.MaximizeHealth();
         _intaractionText.SetEmptyTxt();
         Destroy(gameObject);
     }
 
     #endregion
-
 }

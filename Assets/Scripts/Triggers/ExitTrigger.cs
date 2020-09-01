@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class ExitTrigger : MonoBehaviour
 {
-
     #region Constants
 
     private const float _exitTime = 2f;
@@ -12,7 +11,7 @@ public class ExitTrigger : MonoBehaviour
     #endregion
 
 
-    #region PrivateFields
+    #region Fields
 
     [SerializeField] private Image _exitImage;
     private bool _isExit;
@@ -39,6 +38,16 @@ public class ExitTrigger : MonoBehaviour
 
     private void Update()
     {
+        CheckThatExitProcessIsOn();
+    }
+
+    #endregion
+
+
+    #region Methods
+
+    private void CheckThatExitProcessIsOn()
+    {
         if (_isExit)
         {
             if (_curTime < _exitTime)
@@ -52,11 +61,6 @@ public class ExitTrigger : MonoBehaviour
         }
     }
 
-    #endregion
-
-
-    #region Methods
-
     private void ExitGame()
     {
         _exitImage.enabled = true;
@@ -66,5 +70,4 @@ public class ExitTrigger : MonoBehaviour
     }
 
     #endregion
-
 }

@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class WayPointDebug : MonoBehaviour
 {
-
-#if UNITY_EDITOR_WIN // Для дебага точек патруля
+#if UNITY_EDITOR // For debug
 
     #region Fields
 
@@ -21,13 +20,18 @@ public class WayPointDebug : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        CheckWhatNeedRecountNodes();
+        AddNodes();
+        DrawLine();
+    }
 
-        if (transform.childCount != NodesCount)
-        {
-            Nodes.Clear();
-            NodesCount = 0;
-        }
+    #endregion
 
+
+    #region Methods
+
+    private void AddNodes()
+    {
         if (transform.childCount > 0)
         {
             foreach (Transform T in transform)
@@ -39,7 +43,10 @@ public class WayPointDebug : MonoBehaviour
                 NodesCount++;
             }
         }
+    }
 
+    private void DrawLine()
+    {
         if (Nodes.Count >= 1)
         {
             for (int i = 0; i < Nodes.Count; i++)
@@ -58,7 +65,15 @@ public class WayPointDebug : MonoBehaviour
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawCube(CurrentNode, Vector3.one / 2);
             }
+        }
+    }
 
+    private void CheckWhatNeedRecountNodes()
+    {
+        if (transform.childCount != NodesCount)
+        {
+            Nodes.Clear();
+            NodesCount = 0;
         }
     }
 

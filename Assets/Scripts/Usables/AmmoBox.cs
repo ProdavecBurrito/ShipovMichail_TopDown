@@ -3,30 +3,15 @@
 
 public class AmmoBox : BaseUsable
 {
-
-    #region PrivateMethods
-
-    private Pistol _pistol;
-
-    #endregion
-
-
     #region UnityMethods
-
-    private void Start()
-    {
-        _player = FindObjectOfType<PlayerController>();
-        _pistol = FindObjectOfType<Pistol>();
-        _intaractionText = FindObjectOfType<IntaractionTxt>();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (_pistol.MaxAmmo != _pistol.CurrentAmmoCount)
+            if (_playerInventory.MaxPistolAmmo != _playerInventory.CurrentPistolAmmo)
             {
-                _player.IsCanUse = true;
+                _playerMain.IsCanUse = true;
                 _intaractionText.SetText(_intaractionText.AmmoBoxTxt);
             }
             else
@@ -38,7 +23,7 @@ public class AmmoBox : BaseUsable
 
     private void OnTriggerExit(Collider other)
     {
-        _player.IsCanUse = false;
+        _playerMain.IsCanUse = false;
         _intaractionText.SetEmptyTxt();
     }
 
@@ -49,12 +34,11 @@ public class AmmoBox : BaseUsable
 
     public override void Use()
     {
-        _player.IsCanUse = false;
-        _pistol.RestockAmmo();
+        _playerMain.IsCanUse = false;
+        _playerInventory.RestockPistolAmmo();
         _intaractionText.SetEmptyTxt();
         Destroy(gameObject);
     }
 
     #endregion
-
 }

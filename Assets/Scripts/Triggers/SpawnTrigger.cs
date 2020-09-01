@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class SpawnTrigger : MonoBehaviour
 {
 
-    #region PrivateFields
+    #region Fields
 
     [SerializeField] private List<Spawner> _spawnList;
 
@@ -16,11 +16,11 @@ public class SpawnTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            foreach (Spawner T in _spawnList)
+            foreach (Spawner entity in _spawnList)
             {
-                T.Spawn();
+                entity.Spawn();
             }
             Destroy(gameObject);
         }

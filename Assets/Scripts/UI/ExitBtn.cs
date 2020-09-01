@@ -3,7 +3,6 @@
 
 public class ExitBtn : MonoBehaviour
 {
-
 	#region Methods
 
 	public void Exit()
@@ -12,5 +11,4 @@ public class ExitBtn : MonoBehaviour
 	}
 
     #endregion
-
 }

@@ -4,7 +4,7 @@
 public class Key : BaseUsable
 {
 
-    #region PrivateFields
+    #region Fields
 
     [SerializeField] private bool _isBlueKey;
     [SerializeField] private bool _isYellowKey;
@@ -12,7 +12,7 @@ public class Key : BaseUsable
     #endregion
 
 
-    #region Preferences
+    #region Properties
 
     public bool IsBlueKey => _isBlueKey;
     public bool IsYellowKey => _isYellowKey;
@@ -24,17 +24,12 @@ public class Key : BaseUsable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            _player.IsCanUse = true;
-
-            _intaractionText.SetText(_intaractionText.KeyTxt);
-        }
+        CheckWhatPlayer(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _player.IsCanUse = false;
+        _playerMain.IsCanUse = false;
         _intaractionText.SetEmptyTxt();
     }
 
@@ -58,14 +53,24 @@ public class Key : BaseUsable
         Destroy(gameObject);
     }
 
+    private void CheckWhatPlayer(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _playerMain.IsCanUse = true;
+
+            _intaractionText.SetText(_intaractionText.KeyTxt);
+        }
+    }
+
     public void GrabYellowKey()
     {
-        _player.IsGotYellowKey = true;
+        _playerInventory.IsGotYellowKey = true;
     }
 
     public void GrabBlueKey()
     {
-        _player.IsGotBlueKey = true;
+        _playerInventory.IsGotBlueKey = true;
     }
 
     #endregion 

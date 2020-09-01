@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class IntaractionTxt : MonoBehaviour
 {
-
-    #region PrivateFields
+    #region Fields
 
     [SerializeField] private Text _text;
 
@@ -21,7 +20,7 @@ public class IntaractionTxt : MonoBehaviour
     #endregion
 
 
-    #region Preferences
+    #region Properties
 
     public string KeyTxt => _keyTxt;
     public string DoorText => _doorTxt;
@@ -48,5 +47,4 @@ public class IntaractionTxt : MonoBehaviour
     }
 
     #endregion
-
 }

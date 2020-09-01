@@ -3,31 +3,40 @@
 
 public class Pause : MonoBehaviour
 {
+    #region Fields
 
-    #region PrivateFields
-
-    [SerializeField] private PlayerController _player;
-    [SerializeField] private KeyCode _exitBtn = KeyCode.Escape;
+    [SerializeField] private GameObject[] _playerScripts;
 
     #endregion
 
 
     #region UnityMethods
 
+
+    private void Start()
+    {
+        _playerScripts = GameObject.FindGameObjectsWithTag("Player");
+    }
+
     private void OnEnable()
     {
-        _player.enabled = false;
-        //Cursor.visible = true; // Оставленно для корректировки в будущем
+        foreach (GameObject gameObjects in _playerScripts)
+        {
+            gameObjects.SetActive(false);
+        }
         Time.timeScale = 0;
+        //Cursor.visible = true; // Оставленно для корректировки в будущем
     }
 
     private void OnDisable()
     {
-        _player.enabled = true;
+        foreach (GameObject gameObjects in _playerScripts)
+        {
+            gameObjects.SetActive(true);
+        }
         //Cursor.visible = false;
         Time.timeScale = 1;
     }
 
     #endregion
-
 }

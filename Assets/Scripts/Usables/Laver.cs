@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
+
 public class Laver : BaseUsable
 {
-
     #region Constants
 
     private const float DESTROY_DOOR_TIME = 1f;
@@ -10,7 +10,7 @@ public class Laver : BaseUsable
     #endregion
 
 
-    #region PrivateFields
+    #region Fields
 
     [SerializeField] private GameObject _redDoor;
 
@@ -27,7 +27,7 @@ public class Laver : BaseUsable
         {
             if (_isCanUse)
             {
-                _player.IsCanUse = true;
+                _playerMain.IsCanUse = true;
 
                 _intaractionText.SetText(_intaractionText.LeverTxt);
             }
@@ -36,7 +36,7 @@ public class Laver : BaseUsable
 
     private void OnTriggerExit(Collider other)
     {
-        _player.IsCanUse = false;
+        _playerMain.IsCanUse = false;
         _intaractionText.SetEmptyTxt();
     }
 
@@ -53,5 +53,4 @@ public class Laver : BaseUsable
     }
 
     #endregion
-
 }

@@ -3,22 +3,38 @@
 
 public class Door : BaseUsable
 {
-
     #region UnityMethods
 
     private void OnTriggerEnter(Collider other)
     {
+        CheckWhatPlayer(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _playerMain.IsCanUse = false;
+        _intaractionText.SetEmptyTxt();
+    }
+
+    #endregion
+
+
+    #region Methods
+
+
+    private void CheckWhatPlayer(Collider other)
+    {
         if (other.CompareTag("Player"))
         {
 
-            if (gameObject.CompareTag("BlueDoor") && _player.IsGotBlueKey)
+            if (gameObject.CompareTag("BlueDoor") && _playerInventory.IsGotBlueKey)
             {
-                _player.IsCanUse = true;
+                _playerMain.IsCanUse = true;
                 _intaractionText.SetText(_intaractionText.DoorText);
             }
-            else if (gameObject.CompareTag("YellowDoor") && _player.IsGotYellowKey)
+            else if (gameObject.CompareTag("YellowDoor") && _playerInventory.IsGotYellowKey)
             {
-                _player.IsCanUse = true;
+                _playerMain.IsCanUse = true;
                 _intaractionText.SetText(_intaractionText.DoorText);
             }
             else
@@ -28,17 +44,6 @@ public class Door : BaseUsable
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        _player.IsCanUse = false;
-        _intaractionText.SetEmptyTxt();
-    }
-
-    #endregion
-
-
-    #region Methods
-
     public override void Use()
     {
         _intaractionText.SetEmptyTxt();
@@ -46,5 +51,4 @@ public class Door : BaseUsable
     }
 
     #endregion 
-
 }
