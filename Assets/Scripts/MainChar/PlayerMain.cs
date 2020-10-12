@@ -10,7 +10,7 @@ public class PlayerMain : MonoBehaviour, IGetDamageable
     public Image GameOverImage;
     [SerializeField] private int _health;
     [SerializeField] private int _maxHealth;
-    [SerializeField] private bool _isGameOver;
+    [SerializeField] public bool _isGameOver;
 
     private InputManager _inputManager;
     private BaseUsable _baseUsable;

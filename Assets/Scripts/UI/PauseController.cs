@@ -87,7 +87,7 @@ public class PauseController : MonoBehaviour
 
     private void CheckPauseMenuExit()
     {
-        if (!_pauseMenu.IsPaused && _optionsMenu.activeSelf.Equals(false))
+        if (/*!_pauseMenu.IsPaused &&*/ _optionsMenu.activeSelf.Equals(false))
         {
             PauseOff();
         }

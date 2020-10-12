@@ -39,7 +39,7 @@ public class GameOverController : MonoBehaviour
 
     private void CheckThatGameOverProcessIsOn()
     {
-        if (_player.IsGameOver)
+        if (_player._isGameOver)
         {
             _mainChar.SetActive(false);
             if (_currentTime < EXIT_TIME)
